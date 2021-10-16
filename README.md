@@ -42,6 +42,10 @@ struct Bucket{
 
 Un Page es un bloque continuo de memoria virtual manejado por el sistema operativo. dado que el sistema operativo mueve la información en pages es mas eficiente mover la información en Pages para no tener que realizar busquedas inecesarias de información. Para esto esta la estructura Bucket que tiene un tamaño equivalente (en Bytes) al PAGE SIZE del sistema operativo. Hemos definido el PAGE SIZE como 4096 dado que los integrantes del grupo tenemos multiples sistemas operativos, pero todos comparten la propiedad de tener 4096 Bytes dedicados al page size.
 
+Cada bucket tiene un next y prev que mantiene la posición fisica del siguiente y anterior bucket respectivanente que comparte el mismo producto del hash.
+
+Si el bucket a sido eliminado el valor de freeNext mantendra la posición logica del siguiente bucket que a sido eliminado.
+
 Los buckets son obtenidos por una función hash la cual se almacena en dos partes
 
 ```cpp
@@ -110,8 +114,29 @@ class Hash{
         Registro linearSearchInBucket(Bucket& bucket, long& key);
 };
 ```
+
+Se utiliza de manera exclusiva para almacenar los algoritmos y variables compartidas por estos.
 ## Algoritmos
 
+A continuación una descripción breve de los algoritmos utilizados para el manejo de información:
+
+### Inserción
+
+```
+Crea un nuevo bucket.
+Si no hay ningun Bucket almacenando la key
+    Si existe algun espación vacio (apuntado por la Free list)
+        Sobrescribe dicho espacio con el nuevo bucket
+    Si no
+        Escribir el bucket al final del archivo
+Si ya existe un Bucket almacenando la key
+    
+
+
+
+
+    
+    
 
 
 
