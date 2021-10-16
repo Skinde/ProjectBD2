@@ -141,7 +141,29 @@ Si ya existe un Bucket almacenando el resultado de la función
     Si el tamaño de la cadena de buckets no es de tamaño D (3)
         Apuntar el next del bucket anterior al nuevo bucket
     Si el tamaño de la cadena de buckets es de tamaño D (3)
-        Actualizar el index con la posición fisica del nuevo bucket
+        Actualizar el index con la posición fisica del nuevo bucket (Crear una nueva cadena de buckets)
+```
+
+### Eliminación
+```
+Busca el bucket que contiene el registro
+elimina el registro
+Mover el registro del primer bucket al bucket actual
+Si el primer bucket queda vacio
+    Si la cadena de buckets no tiene mas buckets
+        Actualizar el index a -1
+    Si no
+        Actualizar el index a next
+        Actualizar el prev del next
+    Actualizar el freelist
+```
+
+### Busqueda
+```
+Obtener el resultado de la función hash
+Buscar la cadena de buckets con el mayor numero de bits
+Buscar el registro dentro de cada bucket en la cadena
+Si la cadena no está en el bucket seguir a la siguiente cadena
 ```
     
 
