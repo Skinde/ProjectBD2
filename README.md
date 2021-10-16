@@ -124,12 +124,12 @@ A continuación una descripción breve de los algoritmos utilizados para el mane
 
 ```
 Crea un nuevo bucket.
-Si no hay ningun Bucket almacenando la key
+Si no hay ningun Bucket almacenando el resultado de la función hash
     Si existe algun espacio vacio (apuntado por la Free list)
         Sobrescribe dicho espacio con el nuevo bucket
     Si no
         Escribir el nuevo bucket al final del archivo
-Si ya existe un Bucket almacenando la el producto del hash
+Si ya existe un Bucket almacenando el resultado de la función
     Si existe un espacio vacio (apuntado por la Free list)
         Sobrescribe dicho espacio con el nuevo bucket
         Apuntar el next del bucket anterior al nuevo bucket
