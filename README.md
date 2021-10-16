@@ -54,8 +54,8 @@ struct Index{
 
 El index es la ultima estructura que es almacenada en el disco, se trata de dos matrices unidimensionales.
 
-    * Profunidad: Almacena la cantidad maxima de buckets que pueden estar vinculados por cada resultado de la función hash
-    * Position: Almacena la posición fisica de los buckets de la función hash
+* Profunidad: Almacena la cantidad maxima de buckets que pueden estar vinculados por cada resultado de la función hash
+* Position: Almacena la posición fisica de los buckets de la función hash
 
 Por ultimo está la estructura hash la cual no se almacena en el disco.
 ```cpp
