@@ -126,22 +126,22 @@ A continuación una descripción breve de los algoritmos utilizados para el mane
 Crea un nuevo bucket.
 Si no hay ningun Bucket almacenando el resultado de la función hash
     Si existe algun espacio vacio (apuntado por la Free list)
+        Actualizar el index con la posición fisica del nuevo bucket
+        Actualizar el freelist con el freeNext del bucket que vas a sobrescribir
         Sobrescribe dicho espacio con el nuevo bucket
-        Actualizar el index
-        Actualizar el freelist
     Si no
         Escribir el nuevo bucket al final del archivo
         Actualizar el index
 Si ya existe un Bucket almacenando el resultado de la función
     Si existe un espacio vacio (apuntado por la Free list)
+        Actualizar el freelist con el freeNext del bucket que vas a sobreescribir
         Sobrescribe dicho espacio con el nuevo bucket
-        Actualizar el freelist
     Si no
         Escribir el nuevo bucket al final del archivo
     Si el tamaño de la cadena de buckets no es de tamaño D (3)
         Apuntar el next del bucket anterior al nuevo bucket
     Si el tamaño de la cadena de buckets es de tamaño D (3)
-        Actualizar el index
+        Actualizar el index con la posición fisica del nuevo bucket
 ```
     
 
