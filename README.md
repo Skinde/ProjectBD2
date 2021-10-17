@@ -2,9 +2,11 @@
 
 ## Introducción
 
-Este proyecto tiene el objetivo de crear una base de datos que almacene información sobre juegos de Steam obtenidos de https://steamdb.info/. Se espera poder almacenar y obtener los datos de una forma eficiente en un lenguaje estructurado.
+Este proyecto tiene el objetivo de crear una base de datos que almacene información sobre juegos de Steam obtenidos de https://steamdb.info/. Se espera poder almacenar y obtener los datos de una forma eficiente en un lenguaje estructurado. Para esto utilizaremos dos estructuras: Hash y Sequential para guardar los datos.
 
 ## Estructuras
+
+### Hash
 
 En este proyecto utilizamos la estructura Hash el cual hemos modificado añadiendo un Freelist para un manejo de espacios vacios mas eficientes. 
 A continucación nuestra estructura:
@@ -116,11 +118,66 @@ class Hash{
 ```
 
 Se utiliza de manera exclusiva para almacenar los algoritmos y variables compartidas por estos.
+
+### Sequential
+
+El registro tien una estructura identica a la del hash los cambios son en dos estructuras nuevas
+
+```cpp
+struct SeqRecord {
+        long next;              //ordenamiento temporal
+        long nextDel;           //LIFO FreeList
+        long id;                    
+        long avg_players;
+        long gain;
+        long peak_players;
+        int year;           
+        char URL [35];            
+        char game_name [43];
+
+        void writeWithoutMetadata(ofstream& file){
+            file.write((char*) &id, sizeof(long));
+            file.write((char*) &avg_players, sizeof(long));
+            file.write((char*) &gain, sizeof(long));
+            file.write((char*) &peak_players, sizeof(long));
+            file.write((char*) &year, sizeof(int));
+            file.write((char*) &URL, 35);
+            file.write((char*) &game_name, 43);
+        }
+    };
+```
+SequentialRecord es una estructura similar a la de Record excepto que tiene dos campos adicionales, next: indica el siguiente elemento mayor, nextDel: indica el siguiente elemento a ser eliminado. Ademas tiene una función writeWithoutMetadata encargado de escribir en el archivo el record.
+
+```cpp
+namespace SeqFile {
+    // Lista de constantes
+    const int RAW_RECORD_SIZE = 114;
+    const long END_OF_LIST = -1;
+    const long NO_DELETED = -2;
+    const long ID_OFFSET = 2 * sizeof(long);
+    const long NEXTDEL_OFFSET = sizeof(long);
+    const long METADATA = 3 * sizeof(int) + sizeof(long);
+    const long SIZE_OFFSET = sizeof(int);
+    const long HEAP_OFFSET = 2 * sizeof(int);
+    const long MIN_OFFSET = 3 * sizeof(int);
+
+    stringstream fixedRead(ifstream& file, size_t size){
+        char buffer [size];
+        file.read((char*) &buffer, size);
+        stringstream ss(buffer);
+        return ss;
+    }
+```
+
+SeqFile almacena la información "Meta data" datos que se utilizan para aumentar la eficiencia de los algoritmos.
+
 ## Algoritmos
 
 A continuación una descripción breve de los algoritmos utilizados para el manejo de información:
 
-### Inserción
+### Hash
+
+#### Inserción
 
 ```
 Crea un nuevo bucket.
@@ -144,7 +201,7 @@ Si ya existe un Bucket almacenando el resultado de la función
         Actualizar el index con la posición fisica del nuevo bucket (Crear una nueva cadena de buckets)
 ```
 
-### Eliminación
+#### Eliminación
 ```
 Busca el bucket que contiene el registro
 elimina el registro
@@ -158,12 +215,43 @@ Si el primer bucket queda vacio
     Actualizar el freelist
 ```
 
-### Busqueda
+#### Busqueda
 ```
 Obtener el resultado de la función hash
 Buscar la cadena de buckets con el mayor numero de bits
 Buscar el registro dentro de cada bucket en la cadena
 Si la cadena no está en el bucket seguir a la siguiente cadena
+```
+
+### Sequential
+
+#### Inserción
+
+```
+Buscar el lugar correcto del nuevo registro
+Añadir al aux
+Si el aux esta lleno
+    Reordenar
+Cambiar el next del elemento anterior
+Cambiar el next al siguiente elemento
+```
+
+### Eliminación
+
+
+### Busqueda
+
+```
+Empieza en la mitad del registro
+tomar un rango de busqueda "m" = mitad del tamaño del array
+Si el registro actual es
+Si la key del elemento es de menor tamaño
+    Dividir la posicion del elemento entre m
+Si la key del elemento es de mayor tamaño
+    Multiplicar la posicion del elemento por m
+Divide m/2
+Si m = 1
+    Realizar una busqueda lineal en el aux
 ```
     
 
