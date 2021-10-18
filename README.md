@@ -237,7 +237,7 @@ Si la cadena no está en el bucket seguir a la siguiente cadena
 ### Sequential
 
 
-#### Inserción O(logn + k)
+#### Inserción
 
 ```
 Buscar el lugar correcto del nuevo registro
@@ -251,7 +251,7 @@ Cambiar el next al siguiente elemento
 #### Eliminación
 
 
-#### Busqueda O(logn + k)
+#### Busqueda
 
 ```
 Empieza en la mitad del registro
