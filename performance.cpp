@@ -1,4 +1,4 @@
-#include "test_seqfile.cpp"
+#include "SeqFile/test_seqfile.cpp"
 #include <chrono>
 using namespace SeqFile;
 using namespace std::chrono;
