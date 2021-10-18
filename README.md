@@ -225,11 +225,14 @@ Buscar el registro dentro de cada bucket en la cadena
 Si la cadena no está en el bucket seguir a la siguiente cadena
 ```
 
+### Complejidad de los algoritmos Hash
+<center>
 | Algoritmo | Complejidad |
 |   :---:   |    :---:    |
 | Inserción |     O(1)    |
 |Eliminación|     O(D)    |
 | Busqueda  |     O(D)    |
+</center>
 
 ### Sequential
 
