@@ -228,7 +228,7 @@ Si la cadena no está en el bucket seguir a la siguiente cadena
 ### Busqueda de rango
 ```
 Tomar todos los elementos en el rango
-realizar la busqueda de este elemento
+realizar la busqueda de cada elemento
 ```
 
 ### Complejidad de los algoritmos del Hash
