@@ -273,6 +273,14 @@ Si m = 1
 | Inserción |     O(logn + k)    |
 |Eliminación|     O()            |
 | Busqueda  |     O(logn + k)    |
+
+# Compilación y uso
+
+Para utilizar el algoritmo hash
+```
+g++ main.cpp hash.cpp
+```
+
     
 
 
