@@ -225,7 +225,7 @@ Buscar el registro dentro de cada bucket en la cadena
 Si la cadena no está en el bucket seguir a la siguiente cadena
 ```
 
-### Complejidad de los algoritmos Hash
+### Complejidad de los algoritmos del Hash
 
 | Algoritmo | Complejidad |
 |   :---:   |    :---:    |
@@ -265,6 +265,8 @@ Divide m/2
 Si m = 1
     Realizar una busqueda lineal en el aux
 ```
+
+### Complejidad de los algoritmos del Sequential
 
 | Algoritmo |     Complejidad    |
 |   :---:   |        :---:       |
