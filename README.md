@@ -239,10 +239,10 @@ Cambiar el next del elemento anterior
 Cambiar el next al siguiente elemento
 ```
 
-### Eliminación
+#### Eliminación
 
 
-### Busqueda O(logn + k)
+#### Busqueda O(logn + k)
 
 ```
 Empieza en la mitad del registro
