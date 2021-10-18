@@ -265,6 +265,12 @@ Divide m/2
 Si m = 1
     Realizar una busqueda lineal en el aux
 ```
+
+| Algoritmo |     Complejidad    |
+|   :---:   |        :---:       |
+| Inserción |     O(logn + k)    |
+|Eliminación|     O()            |
+| Busqueda  |     O(logn + k)    |
     
 
 
