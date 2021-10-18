@@ -225,6 +225,12 @@ Buscar el registro dentro de cada bucket en la cadena
 Si la cadena no está en el bucket seguir a la siguiente cadena
 ```
 
+### Busqueda de rango
+```
+Tomar todos los elementos en el rango
+realizar la busqueda de este elemento
+```
+
 ### Complejidad de los algoritmos del Hash
 
 | Algoritmo | Complejidad |
@@ -232,6 +238,7 @@ Si la cadena no está en el bucket seguir a la siguiente cadena
 | Inserción |     O(1)    |
 |Eliminación|     O(D)    |
 | Busqueda  |     O(D)    |
+| Busqueda por rango | O(D * M) |
 
 
 ### Sequential
