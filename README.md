@@ -170,6 +170,8 @@ namespace SeqFile {
 ```
 
 SeqFile almacena la información "Meta data" datos que se utilizan para aumentar la eficiencia de los algoritmos.
+ahi tenemos los tamaños absolutos y relativos del archivo, la cabecera del free list y la posicion fisica del menor indice.
+los datos adicionales del SeqReg tambien son metadatos.
 
 ## Algoritmos
 
