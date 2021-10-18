@@ -179,7 +179,7 @@ A continuación una descripción breve de los algoritmos utilizados para el mane
 
 ### Hash
 
-#### Inserción O(1)
+#### Inserción
 
 ```
 Crea un nuevo bucket.
@@ -203,7 +203,7 @@ Si ya existe un Bucket almacenando el resultado de la función
         Actualizar el index con la posición fisica del nuevo bucket (Crear una nueva cadena de buckets)
 ```
 
-#### Eliminación O(D)
+#### Eliminación
 ```
 Busca el bucket que contiene el registro
 elimina el registro
@@ -217,13 +217,19 @@ Si el primer bucket queda vacio
     Actualizar el freelist
 ```
 
-#### Busqueda O(D)
+#### Busqueda
 ```
 Obtener el resultado de la función hash
 Buscar la cadena de buckets con el mayor numero de bits
 Buscar el registro dentro de cada bucket en la cadena
 Si la cadena no está en el bucket seguir a la siguiente cadena
 ```
+
+| Algoritmo | Complejidad |
+|   :---:   |    :---:    |
+| Inserción |     O(1)    |
+|Eliminación|     O(D)    |
+| Busqueda  |     O(D)    |
 
 ### Sequential
 
