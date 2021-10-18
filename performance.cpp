@@ -1,32 +1,45 @@
-#include "SeqFile/seqfile.cpp"
+#include "test_seqfile.cpp"
 #include <chrono>
 using namespace SeqFile;
 using namespace std::chrono;
 
+/*
 template <class ExtendibleHash> 
+*/
 class ChronoTester {
 private:
     SequentialFile* SF = nullptr;
-    ExtendibleHash* ExH = nullptr;
     /*
-    Record sampleRecord (
-        10000, 0, 0, 0, 0, "este record tiene que tener exactamente 43"
-    )
+    ExtendibleHash* ExH = nullptr;
+    */
+    SeqRecord new_record;
+    /*
     SeqRecord sampleRecord(
         -1, -2 , ....
-    )
-    */
+    )*/
+    
 public:
-    ChronoTester(const string& fileName) {
+    ChronoTester(std::string fileName) {
         SequentialFile SFinstance(fileName);
+        /*
         ExtendibleHash ExHinstance(fileName);
+        */
         SF = &SFinstance;
+        /*
         ExH = &ExHinstance;
+        */
     }
 
+    void test(){
+        new_record.id = 999;
+        add();
+        search(999);
+        rangeSearch(999,999);
+        remove(999);
+    }
     void add(){
         auto start = high_resolution_clock::now();
-        SF->add(record);
+        SF->add(new_record);
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "[SeqFile]: La operación add tomó " << duration.count() << "ms.\n";
