@@ -275,11 +275,11 @@ Si m = 1
 
 ### Complejidad de los algoritmos del Sequential
 
-| Algoritmo |     Complejidad    |
-|   :---:   |        :---:       |
-| Inserción |     O(logn + k)    |
-|Eliminación|     O()            |
-| Busqueda  |     O(logn + k)    |
+| Algoritmo |     Complejidad                                   | 
+|   :---:   |        :---:                                      |
+| Inserción |     O(Dlogn + k) ; si hay reordenamiento: O(MD)   |
+|Eliminación|     O(MD)                                         |
+| Busqueda  |     O(Dlogn + k)                                  |
 
 # Compilación y uso
 
