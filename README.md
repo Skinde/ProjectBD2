@@ -170,7 +170,7 @@ namespace SeqFile {
 ```
 
 SeqFile almacena la información "Meta data" datos que se utilizan para aumentar la eficiencia de los algoritmos.
-ahi tenemos los tamaños absolutos y relativos del archivo, la cabecera del free list y la posicion fisica del menor indice.
+Ahí tenemos los tamaños absolutos y relativos del archivo, la cabecera del free list y la posicion fisica del menor indice.
 los datos adicionales del SeqReg tambien son metadatos.
 
 ## Algoritmos
@@ -179,7 +179,7 @@ A continuación una descripción breve de los algoritmos utilizados para el mane
 
 ### Hash
 
-#### Inserción
+#### Inserción O(1)
 
 ```
 Crea un nuevo bucket.
@@ -203,7 +203,7 @@ Si ya existe un Bucket almacenando el resultado de la función
         Actualizar el index con la posición fisica del nuevo bucket (Crear una nueva cadena de buckets)
 ```
 
-#### Eliminación
+#### Eliminación O(D)
 ```
 Busca el bucket que contiene el registro
 elimina el registro
@@ -217,7 +217,7 @@ Si el primer bucket queda vacio
     Actualizar el freelist
 ```
 
-#### Busqueda
+#### Busqueda O(D)
 ```
 Obtener el resultado de la función hash
 Buscar la cadena de buckets con el mayor numero de bits
@@ -227,7 +227,8 @@ Si la cadena no está en el bucket seguir a la siguiente cadena
 
 ### Sequential
 
-#### Inserción
+
+#### Inserción O(logn + k)
 
 ```
 Buscar el lugar correcto del nuevo registro
@@ -241,7 +242,7 @@ Cambiar el next al siguiente elemento
 ### Eliminación
 
 
-### Busqueda
+### Busqueda O(logn + k)
 
 ```
 Empieza en la mitad del registro
