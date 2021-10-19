@@ -8,12 +8,12 @@ int main() {
 
 
         std::string archivo1 = "Data/1k.dat";
-        ifstream read(archivo1, ios::binary | ios::in);
-        Record read_reg;
+        //ifstream read(archivo1, ios::binary | ios::in);
+        //Record read_reg;
         ChronoTester testea(archivo1);
         testea.test();
-        seqFileTest();
-        read.close();
+        //seqFileTest();
+        //read.close();
 
     
 

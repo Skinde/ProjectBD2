@@ -1,4 +1,5 @@
 #include "SeqFile/test_seqfile.cpp"
+#include "hash/hash.cpp"
 #include <chrono>
 using namespace SeqFile;
 using namespace std::chrono;
@@ -6,43 +7,50 @@ using namespace std::chrono;
 /*
 template <class ExtendibleHash> 
 */
+
+
+
+
+
 class ChronoTester {
 private:
     SequentialFile* SF = nullptr;
-    /*
-    ExtendibleHash* ExH = nullptr;
-    */
+    Hash* ExH = nullptr;
     SeqRecord new_record;
-    /*
-    SeqRecord sampleRecord(
-        -1, -2 , ....
-    )*/
+    Registro record_hash;
+   
     
 public:
-    ChronoTester(std::string fileName) {
+    ChronoTester(const std::string & fileName) {
         SequentialFile SFinstance(fileName);
-        /*
-        ExtendibleHash ExHinstance(fileName);
-        */
+        Hash ExHinstance("index.cpp", fileName);
         SF = &SFinstance;
-        /*
         ExH = &ExHinstance;
-        */
+        
+        
+        
     }
 
     void test(){
         new_record.id = 999;
+        record_hash.primary_key = 999;
         add();
         search(999);
-        rangeSearch(999,999);
+        rangeSearch(998,999);
         remove(999);
     }
     void add(){
         auto start = high_resolution_clock::now();
         SF->add(new_record);
+        
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "[SeqFile]: La operación add tomó " << duration.count() << "ms.\n";
+        start = high_resolution_clock::now();
+        ExH->insertion(record_hash);         
+        stop = high_resolution_clock::now();
+        duration = duration_cast<microseconds>(stop - start);
+        cout << "[Hash]: La operación insert tomó " << duration.count() << "ms.\n"; 
     }
 
     void search(const long& key){
@@ -51,6 +59,11 @@ public:
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "[SeqFile]: La operación search tomó " << duration.count() << "ms.\n";
+        start = high_resolution_clock::now();
+        ExH->search(key);
+        stop = high_resolution_clock::now();
+        duration = duration_cast<microseconds>(stop - start);
+        cout << "[Hash]: La operación search tomó " << duration.count() << "ms.\n";
     }
 
     // que cubra todos los datos 
@@ -60,6 +73,10 @@ public:
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "[SeqFile]: La operación range search tomó " << duration.count() << "ms.\n";
+        start = high_resolution_clock::now();
+        ExH->rangeSearch(begin,end);
+        stop = high_resolution_clock::now();
+        cout << "[Hash]: La operación range search tomó " << duration.count() << "ms.\n";
     }
 
     void remove(const long& key){
@@ -68,7 +85,14 @@ public:
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "[SeqFile]: La operación remove tomó " << duration.count() << "ms.\n";
+        start = high_resolution_clock::now();
+        ExH->deleteThis(key);
+        stop = high_resolution_clock::now();
+        duration = duration_cast<microseconds>(stop - start);
+        cout << "[Hash]: La operación remove tomó " << duration.count() << "ms.\n";
     }
+
+
 
     ~ChronoTester() { delete SF; };
 };
