@@ -3,6 +3,7 @@
 ## Introducción
 
 Este proyecto tiene el objetivo de crear una base de datos que almacene información sobre juegos de Steam obtenidos de https://steamdb.info/. Se espera poder almacenar y obtener los datos de una forma eficiente en un lenguaje estructurado. Para esto utilizaremos dos estructuras: Hash y Sequential para guardar los datos.
+Los datos son alojados en una URL temporal. Se persiste información útil para el negocio, como el número de jugadores activos o las ganancias acumuladas de un año específico. Para este proyecto, alojamos en un archivo binario estos datos, adicionando en el proceso un nuevo campo a modo de primary_key. Existen tres versiones de los datos, una con 1k de registros, otra con 5k y la más grande con casi 10k de registros.
 
 ## Estructuras
 
@@ -146,7 +147,7 @@ struct SeqRecord {
         }
     };
 ```
-SequentialRecord es una estructura similar a la de Record excepto que tiene dos campos adicionales, next: indica el siguiente elemento mayor, nextDel: indica el siguiente elemento a ser eliminado. Ademas tiene una función writeWithoutMetadata encargado de escribir en el archivo el record.
+Esta implementación de SequentialFile almacena los punteros next y nextDel como parte de su metadata, lo que significa que el usuario no tiene que molestarse en adicionar más campos de los ya establecidos en la base de datos original. Así mismo, el archivo original es el único que se modifica, ya que recordemos que no usamos indíces en esta estructura. El usuario recibe como salida el archivo ordenado en base al id, el cual es idéntico en estructura a la base de datos origina y a nuestro Hash.
 
 ```cpp
 namespace SeqFile {
@@ -168,10 +169,9 @@ namespace SeqFile {
         return ss;
     }
 ```
-
-SeqFile almacena la información "Meta data" datos que se utilizan para aumentar la eficiencia de los algoritmos.
-Ahí tenemos los tamaños absolutos y relativos del archivo, la cabecera del free list y la posicion fisica del menor indice.
-los datos adicionales del SeqReg tambien son metadatos.
+Podemos ver las constantes utilizadas para la implementación. Dado que todas las variables necesarias para el mantemiento de la estructura de datos estan en memoria secundaria a modo de encabezado, debemos sumar este espacio cada vez que busquemos en el archivo (const long METADATA). Este encabezado tiene la siguiente estructura (en binario):
+FREE_LIST_HEADER | SIZE | HEAP_SIZE | MIN_INDEX.
+Size y heap size son los tamaños del main file y el heap respectivamente. Min index nos da la posición física del menor elemento, la cual es bastante importante para ciertos casos en las operaciones. También manejamos una free list cuyo encabezado esta en la posición cero.
 
 ## Algoritmos
 
@@ -283,10 +283,20 @@ Si m = 1
 
 # Compilación y uso
 
-Para utilizar el algoritmo hash
+Hash: 
 ```
 g++ main.cpp hash.cpp
 ```
+
+Sequential:
+```
+g++ main.cpp 
+```
+
+# Resultados de tests:
+
+Para el SequentialFile se implemento un set de pruebas que puede encontrar en SeqFile/test_seqfile.cpp Por favor, luego de correr los tests deberá reemplazar los archivos ubicados en la carpeta Data con los de la carpeta saves. Por ejemplo, si usted corre el test utilizando Data/5k.dat debera: ir a la carpeta Data, borrar el archivo 5k.dat, ir a la carpeta Data/saves, copiar el archivo 5k.dat y pegarlo en la carpeta Data. Esto es así ya que el tester realiza adds y deletes sobre el archivo, lo que podría llevar a falsos errores luego de la primera compilación.
+
 
     
 
