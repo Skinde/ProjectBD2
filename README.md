@@ -1,4 +1,10 @@
-# Projecto 1 Base De Datos 2
+# Proyecto 1 Base De Datos 2
+
+## Integrantes
+
+* Diego Paredes
+* Efraín Córdova
+* Miguel Lama
 
 ## Introducción
 
@@ -303,13 +309,6 @@ Tests de performance:
 
 ![Tests de performance](Resultados.png)
 
-    
+# Conclusiones:
 
-
-
-
-    
-    
-
-
-
+ExtendibleHash es una técnica claramente más eficiente que SequentialFile. Su carencia de un algoritmo para búsquedas en rango es su única desventaja. Es notable señalar que SequentialFile trabaja sobre el mismo archivo, lo cual puede ser conveniente si el resultado de las operaciones será usado por un programa externo.
