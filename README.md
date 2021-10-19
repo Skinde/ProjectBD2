@@ -297,7 +297,7 @@ g++ main.cpp
 
 Para el SequentialFile se implemento un set de pruebas que puede encontrar en SeqFile/test_seqfile.cpp Por favor, luego de correr los tests deberá reemplazar los archivos ubicados en la carpeta Data con los de la carpeta saves. Por ejemplo, si usted corre el test utilizando Data/5k.dat debera: ir a la carpeta Data, borrar el archivo 5k.dat, ir a la carpeta Data/saves, copiar el archivo 5k.dat y pegarlo en la carpeta Data. Esto es así ya que el tester realiza adds y deletes sobre el archivo, lo que podría llevar a falsos errores luego de la primera compilación.
 
-![Resultados del test en Sequential](Screenshot from 2021-10-18 20-27-22.png)
+![Resultados del test en Sequential]("Screenshot from 2021-10-18 20-27-22.png")
 
     
 
