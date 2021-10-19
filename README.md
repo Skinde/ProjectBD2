@@ -4,6 +4,8 @@
 
 Este proyecto tiene el objetivo de crear una base de datos que almacene información sobre juegos de Steam obtenidos de https://steamdb.info/. Se espera poder almacenar y obtener los datos de una forma eficiente en un lenguaje estructurado. Para esto utilizaremos dos estructuras: Hash y Sequential para guardar los datos.
 
+Link de video: https://drive.google.com/file/d/15C4K_gU7X4JLx77fkTICGuvyl20P3GYH/view?usp=sharing
+
 ## Estructuras
 
 ### Hash
